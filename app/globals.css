@@ -1,4 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
 
 :root {
   --background: #ffffff;
@@ -14,13 +19,36 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #121417;
     --foreground: #ededed;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* background: var(--background); DEPOIS COLOCAR O TOGGLE DARK THEME */
+  /* color: var(--foreground); DEPOIS COLOCAR O TOGGLE DARK THEME */
+  background: #121417;
+  color: #FFFFFF;
+  font-family: "Inter", sans-serif;
+}
+
+.container {
+  max-width: 2000px;
+  margin: 0 auto;
+}
+
+.logoFont {
+  
+}
+
+.title1 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  line-height: 125%;
+}
+
+.button {
+  font-size: 0.875rem;
+  font-weight: bold;
+  font-weight: 150%;
 }
