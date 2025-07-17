@@ -30,9 +30,12 @@ const InputText: FC<InputTextProps> = ({
   const toggleVisibility = () => setShowPassword((prev) => !prev);
 
   return (
-    <div className="flex flex-col relative">
+    <div className="flex flex-col relative mb-6">
       {label && (
-        <label htmlFor={`${label}_${placeholder?.trim()}_${type}`}>
+        <label
+          className="mb-2"
+          htmlFor={`${label}_${placeholder?.trim()}_${type}`}
+        >
           {label}
         </label>
       )}

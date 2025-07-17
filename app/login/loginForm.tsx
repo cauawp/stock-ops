@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import InputText from "@/components/form/inputText";
 import Button from "@/components/form/button";
 import Cookies from "js-cookie";
@@ -9,6 +10,8 @@ const LoginForm = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+
+  const router = useRouter();
 
   const handleLogin = async () => {
     try {
@@ -28,10 +31,9 @@ const LoginForm = () => {
         throw new Error(data.error || "Erro ao fazer login");
       }
 
-      Cookies.set("accessToken", data.access_token, { expires: 7 }); // Salva token por 7 dias
+      Cookies.set("accessToken", data.access_token, { expires: 7 });
 
-      // Redireciona ou faz algo após o login
-      window.location.href = "/dashboard"; // exemplo
+      router.push("/dashboard");
     } catch (err: any) {
       setError(err.message);
     }

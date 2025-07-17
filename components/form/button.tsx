@@ -6,9 +6,10 @@ import { motion } from "framer-motion";
 interface ButtonProps {
   label: string;
   onClick?: () => Promise<void>;
+  classNameBtn?: string;
 }
 
-const Button: FC<ButtonProps> = ({ label, onClick }) => {
+const Button: FC<ButtonProps> = ({ label, onClick, classNameBtn }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = async () => {
@@ -31,7 +32,7 @@ const Button: FC<ButtonProps> = ({ label, onClick }) => {
       type="button"
       className={`bg-[#0D80F2] text-white w-full py-2.5 rounded-[.5rem] cursor-pointer flex justify-center items-center ${
         isLoading ? "opacity-80 cursor-not-allowed" : ""
-      }`}
+      } ${classNameBtn}`}
     >
       {isLoading ? (
         <motion.div

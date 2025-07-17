@@ -32,6 +32,12 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #293038 inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+
 .container {
   max-width: 2000px;
   margin: 0 auto;

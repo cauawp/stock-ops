@@ -1,7 +1,12 @@
+import Header from "@/components/header";
 import React from "react";
 
 const User = () => {
-  return <div>User</div>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 };
 
 export default User;

@@ -1,28 +1,39 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import InputText from "@/components/form/inputText";
 import Button from "@/components/form/button";
 import Cookies from "js-cookie";
 import InputSelect from "@/components/form/inputSelect";
+import { Option } from "@/components/form/inputSelect";
 
 const SignupForm = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [role, setRole] = useState<string>("");
+  const [role, setRole] = useState<Option>({ label: "", value: "" });
   const [error, setError] = useState<string | null>(null);
+
+  const router = useRouter();
 
   const handleSignup = async () => {
     try {
       setError(null);
+
+      // console.log("Body a ser enviado: ", {
+      //   name,
+      //   email,
+      //   password,
+      //   role: role.value,
+      // });
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password, role }),
+        body: JSON.stringify({ name, email, password, role: role.value }),
       });
 
       const data = await res.json();
@@ -31,11 +42,14 @@ const SignupForm = () => {
         throw new Error(data.error || "Erro ao criar usuário");
       }
 
-      window.location.href = "/login"; // exemplo
+      router.push("/dashboard");
     } catch (err: any) {
       setError(err.message);
     }
   };
+
+  const formIsNull =
+    name === "" || email === "" || password === "" || role.value === "";
 
   return (
     <form
@@ -69,12 +83,20 @@ const SignupForm = () => {
       />
       <InputSelect
         label="Cargo"
-        options={["Opção 1", "Opção 2", "Opção 3"]}
-        placeholder="Selecione uma opção"
+        placeholder="Selecione seu cargo"
+        value={role.value}
+        valueLabel={role.label}
         onChange={setRole}
-        value={role}
+        options={[
+          { label: "Administrador", value: "admin" },
+          { label: "Operador", value: "operator" },
+        ]}
       />
-      <Button label="Criar" onClick={handleSignup} />
+      <Button
+        classNameBtn={`${formIsNull && "pointer-events-none"}`}
+        label="Criar"
+        onClick={handleSignup}
+      />
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
     </form>
