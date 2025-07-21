@@ -9,6 +9,12 @@ export default function LoginPage() {
         <LoginForm />
       </div>
       <p className="text-center text-[#9CABBA] mt-4">
+        Esqueceu sua senha?{" "}
+        <Link className="underline" href="/forgot-password">
+          Clique aqui
+        </Link>
+      </p>
+      <p className="text-center text-[#9CABBA] mt-4">
         Não possúi uma conta?{" "}
         <Link className="underline" href="/signup">
           Crie aqui

@@ -16,22 +16,19 @@ const LoginForm = () => {
   const handleLogin = async () => {
     try {
       setError(null);
-
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include", // <- importante!
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
+        const data = await res.json();
         throw new Error(data.error || "Erro ao fazer login");
       }
-
-      Cookies.set("accessToken", data.access_token, { expires: 7 });
 
       router.push("/dashboard");
     } catch (err: any) {

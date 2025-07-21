@@ -45,8 +45,8 @@ const Header = () => {
             <span className="font-bold text-[18px]">StockOps</span>
           </Link>
         </div>
-        <div className="headerRight">
-          <nav id="menu">
+        <div className="headerRight flex">
+          <nav id="menu" className="flex gap-8">
             <ul className="navLinksContainer flex gap-9 items-center">
               {navLinks.map(({ href, label }) => {
                 // const isActive = pathname.startsWith(href);
@@ -64,6 +64,29 @@ const Header = () => {
                 );
               })}
             </ul>
+            <div className="userIcon">
+              <Link
+                href="/user"
+                className="cursor-pointer block userIconContainer max-w-10 max-h-10 bg-white rounded-full p-2"
+              >
+                <svg
+                  className="userIconSvg w-full h-auto"
+                  width="40"
+                  height="40"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M33.3334 35V31.6667C33.3334 29.8986 32.631 28.2029 31.3808 26.9526C30.1305 25.7024 28.4349 25 26.6667 25H13.3334C11.5653 25 9.86961 25.7024 8.61937 26.9526C7.36913 28.2029 6.66675 29.8986 6.66675 31.6667V35M26.6667 11.6667C26.6667 15.3486 23.682 18.3333 20.0001 18.3333C16.3182 18.3333 13.3334 15.3486 13.3334 11.6667C13.3334 7.98477 16.3182 5 20.0001 5C23.682 5 26.6667 7.98477 26.6667 11.6667Z"
+                    stroke="#1E1E1E"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
+            </div>
           </nav>
         </div>
       </div>

@@ -42,7 +42,7 @@ const SignupForm = () => {
         throw new Error(data.error || "Erro ao criar usuário");
       }
 
-      router.push("/dashboard");
+      router.push("/login");
     } catch (err: any) {
       setError(err.message);
     }

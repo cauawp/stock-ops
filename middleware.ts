@@ -1,34 +1,50 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from "next/server";
 
-// Rotas públicas acessíveis sem autenticação
-const publicRoutes = ['/', '/login', '/signup', '/about']
+// Lista de rotas públicas acessíveis sem autenticação
+const publicRoutes = [
+  "/",
+  "/login",
+  "/signup",
+  "/about",
+  "/forgot-password",
+  "/reset-password",
+];
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
-  const token = request.cookies.get('accessToken')?.value
+  const { pathname } = request.nextUrl;
+  const token = request.cookies.get("accessToken")?.value;
 
-  const isPublicRoute = publicRoutes.includes(pathname)
-  const isLoginOrSignup = pathname === '/login' || pathname === '/signup'
+  const isPublicRoute = publicRoutes.includes(pathname);
+  const isLoginOrSignup = pathname === "/login" || pathname === "/signup";
 
-  // Usuário logado tenta acessar /login ou /signup -> redireciona para /user
-  if (token && isLoginOrSignup) {
-    return NextResponse.redirect(new URL('/user', request.url))
+  // Usuário autenticado
+  if (token) {
+    // Redireciona se tentar acessar /login ou /signup
+    if (isLoginOrSignup) {
+      return NextResponse.redirect(new URL("/user", request.url));
+    }
+
+    // Redireciona se acessar página pública mas não for login/signup
+    if (isPublicRoute && !isLoginOrSignup) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+
+    // Permite acesso normalmente
+    return NextResponse.next();
   }
 
-  // Usuário logado acessa qualquer outra rota pública -> redireciona para /dashboard
-  if (token && isPublicRoute && !isLoginOrSignup) {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
-  }
-
-  // Usuário não logado acessa rota protegida -> redireciona para /login
+  // Usuário não autenticado tentando acessar rota protegida
   if (!token && !isPublicRoute) {
-    return NextResponse.redirect(new URL('/login', request.url))
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   // Caso contrário, permite acesso
-  return NextResponse.next()
+  return NextResponse.next();
 }
 
+// Aplica o middleware a todas as rotas, exceto arquivos estáticos, imagens, favicon e rotas internas do Next
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
-}
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|logo.svg|robots.txt|sitemap.xml|api/).*)",
+  ],
+};
