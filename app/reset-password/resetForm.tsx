@@ -35,7 +35,9 @@ const ResetForm = () => {
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.message || "Erro ao redefinir senha");
+        throw new Error(
+          data.message || data.error || "Erro ao redefinir senha"
+        );
       }
 
       setSuccess("Senha redefinida com sucesso!");

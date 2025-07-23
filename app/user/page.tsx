@@ -6,7 +6,9 @@ const User = () => {
   return (
     <>
       <Header />
-      <UserForm />
+      <div className="px-20 pt-10">
+        <UserForm />
+      </div>
     </>
   );
 };

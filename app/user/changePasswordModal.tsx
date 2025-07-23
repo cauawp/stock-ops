@@ -38,7 +38,7 @@ export default function ChangePasswordModal({
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || "Erro ao alterar senha");
+        throw new Error(data.message || data.error || "Erro ao alterar senha");
       }
 
       setSuccess("Senha alterada com sucesso");

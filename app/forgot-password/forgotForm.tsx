@@ -25,7 +25,7 @@ const ForgotForm = () => {
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.message || "Erro ao enviar email");
+        throw new Error(data.message || data.error || "Erro ao enviar email");
       }
 
       setSuccess("Email enviado! Verifique sua caixa de entrada.");

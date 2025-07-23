@@ -27,7 +27,7 @@ const LoginForm = () => {
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.error || "Erro ao fazer login");
+        throw new Error(data.message || data.error || "Erro ao fazer login");
       }
 
       router.push("/dashboard");

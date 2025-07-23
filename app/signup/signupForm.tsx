@@ -39,7 +39,7 @@ const SignupForm = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Erro ao criar usuário");
+        throw new Error(data.message || data.error || "Erro ao criar usuário");
       }
 
       router.push("/login");
