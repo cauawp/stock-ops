@@ -7,7 +7,9 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #121417;
+
+   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @theme inline {
@@ -20,15 +22,17 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #121417;
-    --foreground: #ededed;
+    --foreground: #ffffff;
   }
 }
 
 body {
-  /* background: var(--background); DEPOIS COLOCAR O TOGGLE DARK THEME */
-  /* color: var(--foreground); DEPOIS COLOCAR O TOGGLE DARK THEME */
-  background: #121417;
-  color: #FFFFFF;
+  background: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  
+  /* background: #121417;
+  color: #FFFFFF; */
   font-family: "Inter", sans-serif;
 }
 
@@ -36,7 +40,6 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px #293038 inset !important;
   -webkit-text-fill-color: white !important;
 }
-
 
 .container {
   max-width: 2000px;

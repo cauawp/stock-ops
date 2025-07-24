@@ -6,8 +6,10 @@ const CreateProduct = () => {
   return (
     <>
       <Header />
-      <h1>CreateProduct</h1>
-      <ProductForm />
+      <div className="max-w-5xl mx-auto p-10">
+        <h1 className="title1 mb-8">Criar produto</h1>
+        <ProductForm />
+      </div>
     </>
   );
 };

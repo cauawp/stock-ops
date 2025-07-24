@@ -11,6 +11,7 @@ interface InputTextProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   showToggleVisibility?: boolean;
   disabled?: boolean;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const InputText: FC<InputTextProps> = ({
@@ -21,6 +22,7 @@ const InputText: FC<InputTextProps> = ({
   onChange,
   showToggleVisibility = false,
   disabled = false,
+  onKeyDown
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -49,6 +51,7 @@ const InputText: FC<InputTextProps> = ({
           type={inputType}
           value={value}
           onChange={onChange}
+          onKeyDown={onKeyDown}
         />
 
         {isPasswordField && showToggleVisibility && (

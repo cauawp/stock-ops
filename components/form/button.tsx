@@ -7,9 +7,10 @@ interface ButtonProps {
   label: string;
   onClick?: () => Promise<void>;
   classNameBtn?: string;
+  disabeld?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({ label, onClick, classNameBtn }) => {
+const Button: FC<ButtonProps> = ({ label, onClick, classNameBtn, disabeld }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = async () => {
@@ -28,7 +29,7 @@ const Button: FC<ButtonProps> = ({ label, onClick, classNameBtn }) => {
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
       onClick={handleClick}
-      disabled={isLoading}
+      disabled={isLoading || disabeld}
       type="button"
       className={`bg-[#0D80F2] text-white w-full py-2.5 rounded-[.5rem] cursor-pointer flex justify-center items-center ${
         isLoading ? "opacity-80 cursor-not-allowed" : ""
